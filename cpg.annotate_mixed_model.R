@@ -129,14 +129,14 @@ cpg.annotate_mixed_model<-function (datatype = c("array", "sequencing"), object,
       tt$diff <- betatt$logFC[m]
       m <- match(rownames(object), rownames(tt))
       tt <- tt[m, ]
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- tt$t
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos,
                                                            anno$pos), stat = stat, diff = tt$diff, ind.fdr = tt$adj.P.Val,
                            is.sig = tt$adj.P.Val < fdr)
       names(annotated) <- rownames(tt)
     }, variability = {
-      RSanno <- getAnnotation(grset)
+      RSanno <- minfi::getAnnotation(grset)
       wholevar <- var(object)
       weights <- apply(object, 1, var)
       weights <- weights/mean(weights)
@@ -192,7 +192,7 @@ cpg.annotate_mixed_model<-function (datatype = c("array", "sequencing"), object,
       if (nsig > 100) {
         message(paste("Your design returned", nsig, "individually significant probes for ANOVA. We recommend the default setting of pcutoff in dmrcate(). Large numbers (e.g. > 100000) may warrant a smaller value of the argument passed to fdr"))
       }
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- sqrtFs
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos,
                                                            anno$pos), stat = stat, diff = 0, ind.fdr = sqrtfdrs,
@@ -224,7 +224,7 @@ cpg.annotate_mixed_model<-function (datatype = c("array", "sequencing"), object,
       }
       m <- match(rownames(object), rownames(tt))
       tt <- tt[m, ]
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- tt$t
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos,
                                                            anno$pos), stat = stat, diff = 0, ind.fdr = tt$Adj.P.Value,
@@ -320,14 +320,14 @@ cpg.annotate_dupp_cor <- function (datatype = c("array", "sequencing"), object, 
       tt$diff <- betatt$logFC[m]
       m <- match(rownames(object), rownames(tt))
       tt <- tt[m, ]
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- tt$t
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos, 
                                                            anno$pos), stat = stat, diff = tt$diff, ind.fdr = tt$adj.P.Val, 
                            is.sig = tt$adj.P.Val < fdr)
       names(annotated) <- rownames(tt)
     }, variability = {
-      RSanno <- getAnnotation(grset)
+      RSanno <- minfi::getAnnotation(grset)
       wholevar <- var(object)
       weights <- apply(object, 1, var)
       weights <- weights/mean(weights)
@@ -360,7 +360,7 @@ cpg.annotate_dupp_cor <- function (datatype = c("array", "sequencing"), object, 
       if (nsig > 100) {
         message(paste("Your design returned", nsig, "individually significant probes for ANOVA. We recommend the default setting of pcutoff in dmrcate(). Large numbers (e.g. > 100000) may warrant a smaller value of the argument passed to fdr"))
       }
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- sqrtFs
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos, 
                                                            anno$pos), stat = stat, diff = 0, ind.fdr = sqrtfdrs, 
@@ -392,7 +392,7 @@ cpg.annotate_dupp_cor <- function (datatype = c("array", "sequencing"), object, 
       }
       m <- match(rownames(object), rownames(tt))
       tt <- tt[m, ]
-      anno <- getAnnotation(grset)
+      anno <- minfi::getAnnotation(grset)
       stat <- tt$t
       annotated <- GRanges(as.character(anno$chr), IRanges(anno$pos, 
                                                            anno$pos), stat = stat, diff = 0, ind.fdr = tt$Adj.P.Value, 
